@@ -1,0 +1,61 @@
+# === FLUTTER / DART ===
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.metadata
+**/pubspec.lock
+
+# Android (nativo - si generaste proyecto)
+**/android/.gradle/
+**/android/.idea/
+**/android/local.properties
+**/android/.DS_Store
+**/android/build/
+
+# iOS (si lo exportás desde Flutter)
+**/ios/.generated/
+**/ios/Flutter/.last_build_id
+
+# === C / ESP32 / EDU-CIAA ===
+**/*.o
+**/*.out
+**/*.elf
+**/*.hex
+**/build/
+**/Debug/
+**/Release/
+**/.vscode/
+**/*.map
+**/*.bin
+
+# === ARCHIVOS DE SISTEMA / IDES ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.log
+*.tmp
+*.bak
+*.~*
+
+# === GIT / CONFIG PRIVADA ===
+*.env
+*.key
+*.pem
+*.crt
+*.cfg
+*.json
+*.zip
+*.tar.gz
+*.rar
+
+# === DOCUMENTACIÓN / PDF (opcional) ===
+# Puedes quitar esto si querés subir el informe
+# /docs/*.pdf
+
+# === BACKUPS / AUTOGENERADOS ===
+*.old
+*.orig
+*.backup

@@ -1,0 +1,1 @@
+export 'package:control/presentation/pages/home_page.dart';

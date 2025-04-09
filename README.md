@@ -8,6 +8,7 @@ Proyecto académico (PPS) realizado en la Facultad de Ingeniería (UNLP), orient
 - **Sensor LiDAR** – Medición de distancias
 - **Flutter** – App Android para control remoto
 - **Servidor local** – Recepción de datos
+- **C / C++ / Dart** – Desarrollo del software embebido y la app
 
 ## Estructura del proyecto
 - `/android-app` – Código fuente de la aplicación móvil en Flutter
