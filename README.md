@@ -15,7 +15,6 @@ Proyecto académico (PPS) realizado en la Facultad de Ingeniería (UNLP), orient
 - `/esp32-cam` – Código en C++ para el módulo ESP32-CAM
 - `/edu-ciaa` – Código en C para la EDU-CIAA (control de hardware)
 - `/docs` – Documentación, PDFs, diagramas, etc.
-- `/db` – Scripts SQL o archivos de configuración (opcional)
 
 ## Estado del proyecto
 Prototipo funcional desarrollado como práctica profesional supervisada. Se encuentra en versión demostrativa.
