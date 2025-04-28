@@ -7,7 +7,7 @@
 #define IN3 2
 #define IN4 4
 
-const int stepsPerRevolution = 2048;  // Numero de pasos por revolucion
+const int stepsPerRevolution = 2048;  // Numero de pasos por revolucion acorde al motor paso a paso
 
 // Inicializa la libreria stepper
 Stepper myStepper(stepsPerRevolution, IN1, IN3, IN2, IN4);

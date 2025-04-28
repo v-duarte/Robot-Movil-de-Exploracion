@@ -120,14 +120,12 @@ bool hayPaqueteDatos(char *buffer, size_t bufferSize) {
   if (getPortDatosActivo() && clienteConectado){            //Chequeo socket de datos y clienteConectado
     int packetSize = udpDatos.parsePacket();
     if (packetSize > 0 && packetSize < bufferSize) {        //Chequeo que hay mensaje y que entra en el buffer
-      //Serial.println("Hay paquete udp de Datos");
       if (udpDatos.remoteIP() == ipCliente){                //Chequeo que la ip del packete sea la del clienteConectado
         memset(buffer, 0, bufferSize);                      // Limpia el buffer    
         int len = udpDatos.read(buffer, bufferSize - 1);    //Guardo el mensaje en el buffer
           if (len > 0){
             buffer[len] = '\0';                             //Agrego caracter de fin del mensaje
             if (packeteEnOrden(buffer, bufferSize)){        //Se fija que el packete este en tiempo, y elimina el numero de secuencia.
-              //Serial.println("Hay paquete de datos en buffer");
               return true;                                  //Se retorna true, dejando en buffer el mensaje listo para procesar.
             }
               return false;                                 //Se retorna dado que el mensaje llego tarde.
@@ -137,12 +135,10 @@ bool hayPaqueteDatos(char *buffer, size_t bufferSize) {
           }
       }
       descartarPacket (packetSize, buffer, bufferSize);     //Descarto el paquete dado que no es del usuario en comunicacion
-      //Serial.println("Paquete de datos descartado, no es del cliente");
       return false;
     }
     if (packetSize > bufferSize){
         descartarPacket(packetSize, buffer, bufferSize);    //Descarta el paquete porque supera el tamaño del buffer
-        //Serial.println("Paquete de datos descartado, es grande");
       }
     return false;
   }
@@ -152,13 +148,11 @@ bool hayPaqueteControl(char *buffer, size_t bufferSize) {
   if (getPortControlActivo()){                              //Chequeo el socket de control
     int packetSize = udpControl.parsePacket();
     if (packetSize > 0) {                                   //Chequeo que hay mensaje y que entra en el buffer
-    //Serial.println("Hay paquete udp de Control");
       memset(buffer, 0, bufferSize);                        //Limpia el buffer
       ipCliente = udpControl.remoteIP();                    //Guardo la ip del ultimo mensaje
       int len = udpControl.read(buffer, bufferSize - 1);    //Guardo el mensaje en el buffer
       if (len > 0){
         buffer[len] = '\0';                                 //Agrego caracter de fin del mensaje
-        //Serial.println("Hay paquete de datos en buffer");
         return true;
       }
       return false;                                         //Fallo la lectura del paquete
@@ -175,13 +169,11 @@ void conectarCliente(){
   String mensaje = "AP IP:" + ipServidorUDP.toString();     //Construir el mensaje
   const char* mensajeFinal = mensaje.c_str();               //Convierte el mensaje a const char
   enviarMensaje (portDatos, ipCliente, mensajeFinal);       //Envio mensaje de confirmacion
-  //Serial.println("Se envio la ip al cliente");
   cerrarPort (portControl);
 }
 
 void desconectarCliente(){
   ipCliente = IPAddress(0, 0, 0, 0);                        // Asignar la IP "vacía" 0.0.0.0;
-  //Serial.println("Cliente desconectado");
   abrirPort(portControl);
   cerrarPort(portDatos);
   clienteConectado = false;

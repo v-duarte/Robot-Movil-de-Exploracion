@@ -25,8 +25,9 @@ void procesarMenssage ( char *cadena){   //  "ets Jun 8 2016" "AP IP address: 16
     char *token = strtok(cadena, ",");
     
    if (token != NULL) {
-        double valor = strtod(token, &endptr);  // Intentamos convertir el token a número
+        double valor = strtod(token, &endptr);  // Intentamos convertir el token a numero
         if (*endptr == '\0') {                  // Verificamos si toda la cadena fue convertida
+            index = valor;
             pos_X = valor * 100;
         }
     }
@@ -37,11 +38,11 @@ void procesarMenssage ( char *cadena){   //  "ets Jun 8 2016" "AP IP address: 16
             pos_Y = valor * 100;
         }
     }
-    switch (pos_X){
+    switch (index){
         case 200:
             //Enviar mensaje al ESP32 de conexion establecida.
             //vaciar el buffer de UART_232
-            //uartWriteString(UART_232, "200");                   //envio la cadena 200 para que el ESP32 sepa que puede empezar a transmitir.
+            uartWriteString(UART_232, "200");                   //envio la cadena 200 para que el ESP32 sepa que puede empezar a transmitir.
             //Enciendo led de conexion activa.
             //gpioWrite( GPIO6, ON );
             uartWriteString(UART_USB, "Llego un 200."); 

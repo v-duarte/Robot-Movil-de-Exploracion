@@ -4,6 +4,8 @@
 #define PORT_TX 12
 #define PORT_RX 13
 
+const int CALIBRACION_LIDAR = 28;  // Valor de calibración en mm respecto al desfasaje entre la posicion del sensor LiDAR y la camara
+
   
 
 uint8_t  cmd[5] = {0x55, 0xAA, 0x81, 0x00, 0xFA};  //Envia comando medir distancia
@@ -15,7 +17,6 @@ typedef struct { // Definicion de estructura para almacenar respuesta
 } TF;
 
 TF Lidar = {0,0,false};
-const int CALIBRACION_LIDAR = 28;  // Valor de calibración en mm respecto al desfasaje entre la posicion del sensor LiDAR y la camara
 
 /***************************************
  *  Protocolo:
@@ -90,15 +91,4 @@ int getDistanciaCalibrada(){  //Devuelve la distancia calibrada
   }
   Lidar.receiveComplete = false;
   return (Lidar.distance + CALIBRACION_LIDAR);
-}
-
-void Port_Print_Ascii(TF* lidar)
-{
-  Serial.print("Distancia(mm):");
-  Serial.println(lidar->distance);
-  if(lidar->ErrorCode)
-  {
-    Serial.print("ErrorCode = ");
-    Serial.println(lidar->ErrorCode,HEX);
-  }
 }

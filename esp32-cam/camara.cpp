@@ -18,6 +18,8 @@ const int POS_Y_LINEA = 85; // Fija la posición Y para dibujar la marca
 const int ESPACIADO = 50; // Fija el espaciado entre las marcas
 const int FIN_LINEA = 100; //Fija la posicion de fin de la marca
 
+
+
 httpd_handle_t camera_httpd = NULL; // Manejador del servidor HTTP
 bool streaming = true;              // Variable para alternar entre streaming y captura de fotos
 
@@ -60,7 +62,6 @@ void setup_camara() {
     config.jpeg_quality = 12;            // Calidad del JPEG
     config.fb_count = 1;                 // Número de buffers de framebuffer
   }
-
   // Inicializar la cámara
   esp_err_t err = esp_camera_init(&config);
   if (err != ESP_OK) {
@@ -86,23 +87,6 @@ bool capturar_foto(camera_fb_t **fb) {
     return false; //Error al capturar la foto
   }
   return true;
-}
-
-//Guarda la la imagen en la tarjeta SD
-bool guardar_foto(camera_fb_t *fb, String path){  // Guardar la foto en la tarjeta SD
-  bool exito;
-  File file = SD_MMC.open(path.c_str(), FILE_WRITE);
-  if (!file) {
-    Serial.println("Error al abrir el archivo para escribir");
-    exito=false;
-  } else {
-    file.write(fb->buf, fb->len);  // Escribir los datos de la imagen en el archivo: la imagen y el tamaño de archivo
-    Serial.printf("Foto guardada: %s\n", path.c_str());
-    exito=true;
-  }
-
-  file.close();  // Cerrar el archivo
-  return exito;
 }
 
 //Guarda la la imagen en la tarjeta SD
@@ -146,16 +130,17 @@ void modificarPixelBMP(uint8_t * bmpData, int x, uint32_t color) {
 
 
 // Función para dibujar la línea de píxeles
-void dibujarLinea(uint8_t * bmp_buf, uint32_t colores[32]) {
-  for (int i = 0; i < 15; i++) {
-      int x = i*ESPACIADO; // Posición X basada en el índice
+void dibujarLinea(uint8_t * bmp_buf, uint32_t colores[cantMedidas]) {
+  int correccion_desplazamiento = 24;
+  for (int i = 0; i < (cantMedidas); i++) {
+      int x = i*ESPACIADO + correccion_desplazamiento; // Posición X basada en el índice 
       modificarPixelBMP(bmp_buf, x, colores[i]); // Dibujar píxel en la posición (x, y) con el color
   }
 }
 
 // Método para capturar una foto y procesar imagen con las medidas tomadas.
 // Devuelve 0 en caso de fallar el procesamiento, el tamaño del buffer en caso contrario
-size_t tomarFoto(uint32_t colores[32], uint8_t **bmp_buf){
+size_t tomarFoto(uint32_t colores[cantMedidas], uint8_t **bmp_buf){
   camera_fb_t *fb;  //buffer de imagen  
   size_t bmp_len = 0;         // Tamaño del búfer BMP
   
