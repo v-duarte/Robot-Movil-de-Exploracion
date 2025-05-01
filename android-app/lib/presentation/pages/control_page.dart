@@ -76,6 +76,7 @@ class _ControlPageState extends State<ControlPage> {
                 mode: JoystickMode.vertical,
                 base: JoystickBase(
                   mode: JoystickMode.vertical,
+                  size: 180,
                   decoration: JoystickBaseDecoration(
                     color: const Color.fromARGB(150, 0, 0, 0),
                     drawOuterCircle: false,
@@ -114,6 +115,7 @@ class _ControlPageState extends State<ControlPage> {
                 mode: JoystickMode.horizontal,
                 base: JoystickBase(
                   mode: JoystickMode.horizontal,
+                  size: 180,
                   decoration: JoystickBaseDecoration(
                     color: const Color.fromARGB(150, 0, 0, 0),
                     drawOuterCircle: false,
