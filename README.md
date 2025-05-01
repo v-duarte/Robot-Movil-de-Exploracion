@@ -17,6 +17,7 @@ Proyecto académico (PPS) realizado en la Facultad de Ingeniería (UNLP), orient
 - `/docs` – Documentación, PDFs, diagramas, etc.
 
 ## Estado del proyecto
+![alt text](https://github.com/v-duarte/Robot-Movil-de-Exploracion/blob/main/docs/Imagenes%20RME/RME_encendido.jpg "RME en marcha")
 Prototipo funcional desarrollado como práctica profesional supervisada. Se encuentra en versión demostrativa.
 
 ## Equipo
